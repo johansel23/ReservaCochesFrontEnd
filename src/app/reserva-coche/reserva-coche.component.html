@@ -4,7 +4,7 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="https://www.autobild.es/sites/autobild.es/public/styles/main_element/public/dc/fotos/Lamborghini_Aventador_SVJ_03.jpg?itok=P54wIntD" class="img-fluid rounded-start" alt="Alta Gama">
+      <img src="{{coche.coche.image}}" class="img-fluid rounded-start" alt="Alta Gama">
     </div>
     <div class="col-md-8">
       <div class="card-body text-center">
@@ -24,9 +24,9 @@
   <form class="row g-3 text-center" (ngSubmit)="insertarReserva()" #formularioEvento="ngForm">
     <div class="col-12">
 
-      <input type="text" class="form-control text-center" name="id_coche" [(ngModel)]="nuevaReserva.id_coche">
-      <input type="text" class="form-control text-center" name="id_usuario" [(ngModel)]="nuevaReserva.id_usuario">
-      <input type="text" class="form-control text-center" name="is_reservado" [(ngModel)]="nuevaReserva.is_reservado">
+      <input type="hidden" class="form-control text-center" name="id_coche" [(ngModel)]="nuevaReserva.id_coche">
+      <input type="hidden" class="form-control text-center" name="id_usuario" [(ngModel)]="nuevaReserva.id_usuario">
+      <input type="hidden" class="form-control text-center" name="is_reservado" [(ngModel)]="nuevaReserva.is_reservado">
 
       <div class="col-12">
         <label for="fecha" class="form-label">Fecha</label>

@@ -19,11 +19,11 @@ import { RegistroComponent } from './registro/registro.component';
 
 const APP_ROUTES: Route[] = [
 
+  { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'marcas', component: MarcaComponent },
   { path: 'modelos', component: ModeloComponent },
   { path: 'coches', component: CocheComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'reserva-coche', component: ReservaCocheComponent },
   { path: 'mis-reservas', component: MisReservasComponent },
   { path: 'registro', component: RegistroComponent },
