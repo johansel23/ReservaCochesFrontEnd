@@ -14,7 +14,7 @@
         <p class="card-text" *ngIf="coche.coche.transmision == true">Transmision: Automatico</p>
         <p class="card-text">Combustible: {{coche.coche.combustible}}</p>
         <p class="card-text">Color: {{coche.coche.color}}</p>
-        <p class="card-text">Precio: {{coche.coche.precio}}</p>
+        <p class="card-text">Precio: <span class="text-danger"> {{coche.coche.precio}} € </span></p>
       </div>
     </div>
   </div>

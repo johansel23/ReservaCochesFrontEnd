@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Coche } from '../interfaces/coche';
 import { ReservaCoche } from '../interfaces/reserva-coche';
 import { ReservaCocheService } from '../services/reserva-coche.service';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-reserva-coche',
@@ -17,21 +18,28 @@ export class ReservaCocheComponent implements OnInit {
   nuevaReserva: ReservaCoche ={
     id_coche: 0,
     fecha: '',
-    id_usuario: 3,
+    id_usuario: 0,
     is_reservado: 'true'
   };
 
-  constructor(private reserva: ReservaCocheService, private router: Router) { }
+  constructor(private reserva: ReservaCocheService, private router: Router, private usuario: UsuariosService) { }
 
   ngOnInit(): void {
     this.coche = history.state;
     this.nuevaReserva.id_coche = this.coche.coche.id_coche;
+    this.obtenerUsuario();
   }
 
   obtenerReserva(){
     this.reserva.getReservaCoche().subscribe((datos:any) =>{
       this.listaReservas = datos;
     });
+  }
+
+  obtenerUsuario(){
+    this.usuario.getCurrentUser().subscribe((datos: any) =>{
+      this.nuevaReserva.id_usuario = datos;
+    })
   }
 
   insertarReserva(){

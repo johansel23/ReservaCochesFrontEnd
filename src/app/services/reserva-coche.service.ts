@@ -22,4 +22,12 @@ export class ReservaCocheService {
   postReservaCoche(reserva: ReservaCoche){
     return this.http.post(`${HOST}`,reserva);
   }
+
+  putReserva(reserva: ReservaCoche, id: number){
+    return this.http.put(`${HOST}/${id}`,reserva);
+  }
+
+  deleteMarcas(id:number){
+    return this.http.delete(`${HOST}/${id}`)
+  }
 }

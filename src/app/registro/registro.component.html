@@ -1,10 +1,8 @@
 <div class="mb-3">
   <form class="row g-3 text-center" (ngSubmit)="crearRegistro()" #formularioEvento="ngForm">
     <div class="col-12">
+
       <label for="nombre" class="form-label h4 mt-2">Usuario</label>
-      <!-- El ngModel sirve para relacionar el valor que ingreses en el input con el precio que esta en eventos.component.ts y se relaciona con la interfaz-->
-      <!-- el primero parametro del ngClass esta relacionado con #precio="ngModel"-->
-      <!-- Para usar el ngClass es necesario crear la funcion validClasses en el eventos.components.ts -->
       <input type="text" class="form-control text-center" id="nombre" name="nombre" [(ngModel)]="nuevoRegistro.nombre"
         placeholder="Ingresa el nombre de una Marca" required #nombre="ngModel" minlength="1" maxlength="100"
         [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
@@ -27,13 +25,6 @@
       <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
         Contraseña obligatoria
       </div>
-
-      <!-- <label for="password" class="form-label h4 mt-2">Rol</label>
-      <select class="form-select" aria-label="Default select example" name="rol" [(ngModel)]="nuevoRegistro.administrador"  #rol="ngModel">
-        <option selected>Open this select menu</option>
-        <option [value]="false">Usuario</option>
-        <option [value]="true" >Administrador</option>
-      </select> -->
     </div>
     <div class="col-12">
       <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->

@@ -25,7 +25,7 @@ export class RegistroComponent implements OnInit {
 
   crearRegistro(){
     console.log(this.nuevoRegistro);
-    this.registro.postReservaCoche(this.nuevoRegistro).subscribe((datos:any)=>{
+    this.registro.postUsuario(this.nuevoRegistro).subscribe((datos:any)=>{
       Swal.fire({
         icon: 'success',
         title: 'Usuario Creado',

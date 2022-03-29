@@ -7,13 +7,13 @@
 <div class="my-3" *ngIf="mostrar">
   <form class="row g-3 text-center" (ngSubmit)="insertarModelo()" #formularioEvento="ngForm">
     <div class="col-12">
-      <label for="nombre" class="form-label h2">Modelo </label>
+      <label for="nombre" class="form-label h2">Marca </label>
       <select class="form-select" aria-label="Default select example" [(ngModel)]="nuevoModelo.id_marca" name="id_marca" required>
         <option disabled>Elige un modelo</option>
         <option *ngFor="let marcas of listaMarcas" [value]="marcas.id_marca">{{marcas.nombre_marca}}</option>
       </select>
 
-      <label for="nombre" class="form-label h2">Marca </label>
+      <label for="nombre" class="form-label h2">Modelo </label>
       <!-- El ngModel sirve para relacionar el valor que ingreses en el input con el precio que esta en eventos.component.ts y se relaciona con la interfaz-->
       <!-- el primero parametro del ngClass esta relacionado con #precio="ngModel"-->
       <!-- Para usar el ngClass es necesario crear la funcion validClasses en el eventos.components.ts -->

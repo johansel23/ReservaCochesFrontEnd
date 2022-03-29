@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
         "password": this.password
       })
       .subscribe((datos: any) => {
-        console.log(datos);
         localStorage.setItem('token', datos.accessToken);
         this.router.navigate(["/home"]);
       });

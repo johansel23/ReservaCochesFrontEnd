@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 
-const HOST= "http://localhost:8080/auth/login";
+const HOST= "http://localhost:8080/auth";
 
 
 
@@ -14,8 +14,8 @@ const HOST= "http://localhost:8080/auth/login";
 
 export class UsuariosService {
   constructor(private http:HttpClient) { }
-  
-  postLogin(usuario: any) {return this.http.post(`${HOST}`, usuario)}
+
+  postLogin(usuario: any) {return this.http.post(`${HOST}/login`, usuario)}
 
   logOut(){
     localStorage.removeItem("token");
@@ -23,6 +23,10 @@ export class UsuariosService {
 
   isLogged(){
     return localStorage.getItem("token")!=null;
+  }
+
+  getCurrentUser(){
+    return this.http.get(`${HOST}/getCurrentUser`);
   }
 
 }
