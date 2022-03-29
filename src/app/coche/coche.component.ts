@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Coche } from '../interfaces/coche';
 import { CocheService } from '../services/coche.service';
 import { ModeloService } from '../services/modelo.service';
@@ -23,7 +25,7 @@ export class CocheComponent implements OnInit {
     is_disponible: false
   };
 
-  constructor(private coches: CocheService, private modelo: ModeloService) { }
+  constructor(private coches: CocheService, private modelo: ModeloService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerModelos();
@@ -44,9 +46,43 @@ export class CocheComponent implements OnInit {
   }
 
   insertarCoche(){
-    this.coches.postCoches(this.nuevoCoche).subscribe((datos:any) =>{
-      this.obtenerCoches();
-    });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger me-1'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Estas a punto de insertar un coche!',
+      text: "Estas seguro",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Insertar',
+      cancelButtonText: 'No, cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Insertado',
+          'Tu coche ha sido registrado',
+          'success'
+        )
+        this.coches.postCoches(this.nuevoCoche).subscribe((datos:any) =>{
+          // this.obtenerCoches();
+          this.router.navigate(["/home"]);
+        })
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'Operacion Cancelada :)',
+          'error'
+        )
+      }
+    })
   }
 
   //funcion para convertir una imagen a base 64

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Coche } from '../interfaces/coche';
 import { ReservaCoche } from '../interfaces/reserva-coche';
@@ -20,7 +21,7 @@ export class ReservaCocheComponent implements OnInit {
     is_reservado: 'true'
   };
 
-  constructor(private reserva: ReservaCocheService) { }
+  constructor(private reserva: ReservaCocheService, private router: Router) { }
 
   ngOnInit(): void {
     this.coche = history.state;
@@ -34,14 +35,42 @@ export class ReservaCocheComponent implements OnInit {
   }
 
   insertarReserva(){
-    console.log(this.nuevaReserva);
-    this.reserva.postReservaCoche(this.nuevaReserva).subscribe((datos:any)=>{
-      Swal.fire({
-        icon: 'success',
-        title: 'Operacion creada',
-        text: 'Añadido correctamente!',
-      });
-    });
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger me-1'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Estas a punto de reservar un coche!',
+      text: "Estas seguro?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Reservar',
+      cancelButtonText: 'No, cancelar Reserva',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Reservado!',
+          'Tu coche ha sido reservado',
+          'success'
+        )
+        this.reserva.postReservaCoche(this.nuevaReserva).subscribe((datos:any)=>{
+          this.router.navigate(["mis-reservas"]);
+        });
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelado',
+          'Operacion Cancelada :)',
+          'error'
+        )
+      }
+    })
   }
 
   //Funcion para la validacion de los formularios
