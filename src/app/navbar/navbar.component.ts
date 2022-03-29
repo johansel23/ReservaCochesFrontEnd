@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   showHiddenOptions: boolean = false;
-  constructor() { }
+
+  constructor(private usuarios : UsuariosService) { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    this.usuarios.logOut();
+    this.showHiddenOptions = false;
+  }
+
+  isLogged(){
+    return this.usuarios.isLogged();
   }
 
 }

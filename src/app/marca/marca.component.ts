@@ -13,6 +13,7 @@ export class MarcaComponent implements OnInit {
   //creamos la variable que va a guardar las marcas que vienen del back
   nuevaMarca: Marca ={nombre_marca:''};
   listaMarcas: any = [];
+  //Lista para obtener las marcas
   mostrar: boolean = false;
 
   constructor(private marcas: MarcaService) { }

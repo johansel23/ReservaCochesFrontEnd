@@ -1,0 +1,45 @@
+
+<h1 class="text-center my-3">Crear Reserva</h1>
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://www.autobild.es/sites/autobild.es/public/styles/main_element/public/dc/fotos/Lamborghini_Aventador_SVJ_03.jpg?itok=P54wIntD" class="img-fluid rounded-start" alt="Alta Gama">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{coche.coche.modelo.marca.nombre_marca}} {{coche.coche.modelo.nombre_modelo}}</h5>
+        <p class="card-text">Año: {{coche.coche.anyo}}</p>
+        <p class="card-text" *ngIf="coche.coche.transmision == false">Transmision: Mecanico</p>
+        <p class="card-text" *ngIf="coche.coche.transmision == true">Transmision: Automatico</p>
+        <p class="card-text">Combustible: {{coche.coche.combustible}}</p>
+        <p class="card-text">Color: {{coche.coche.color}}</p>
+        <p class="card-text">Precio: {{coche.coche.precio}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-3 alert alert-dark">
+  <form class="row g-3 text-center" (ngSubmit)="insertarReserva()" #formularioEvento="ngForm">
+    <div class="col-12">
+
+      <input type="text" class="form-control text-center" name="id_coche" [(ngModel)]="nuevaReserva.id_coche">
+      <input type="text" class="form-control text-center" name="id_usuario" [(ngModel)]="nuevaReserva.id_usuario">
+      <input type="text" class="form-control text-center" name="is_reservado" [(ngModel)]="nuevaReserva.is_reservado">
+
+      <div class="col-12">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" name="fecha" [(ngModel)]="nuevaReserva.fecha" class="form-control text-center" id="fecha" required
+          #fecha="ngModel" [ngClass]="validClasses(fecha, 'is-valid', 'is-invalid')">
+      </div>
+
+
+    </div>
+    <div class="col-12">
+       <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->
+      <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
+    </div>
+  </form>
+</div>
+

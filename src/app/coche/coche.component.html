@@ -1,0 +1,71 @@
+<h1 class="text-center my-3">Insertar Coche</h1>
+<div class="my-3 alert alert-danger">
+  <form class="row g-3 text-center" (ngSubmit)="insertarCoche()" #formularioEvento="ngForm">
+    <div class="col-12">
+      <label class="form-label" for="">Modelo</label>
+      <select class="form-select text-center" aria-label="Default select example" [(ngModel)]="nuevoCoche.id_modelo" name="id_modelo">
+        <option selected>Open this select menu</option>
+        <option *ngFor="let modelos of listaModelo" [value]="modelos.id_modelo">{{modelos.nombre_modelo}}</option>
+      </select>
+
+      <label for="combustible" class="form-label mt-3">Combustible</label>
+      <input type="text" class="form-control text-center" id="combustible" name="combustible" [(ngModel)]="nuevoCoche.combustible"
+        placeholder="Ingresa el combustible" required #combustible="ngModel" minlength="1" maxlength="100"
+        [ngClass]="validClasses(combustible, 'is-valid', 'is-invalid')">
+      <div *ngIf="combustible.touched && combustible.invalid" class="alert alert-danger">
+        El modelo es requerido (entre 1 y 60 caracteres)
+      </div>
+
+      <label for="color" class="form-label mt-3">Color</label>
+      <input type="text" class="form-control text-center" id="color" name="color" [(ngModel)]="nuevoCoche.color"
+        placeholder="Ingresa el Color" required #color="ngModel" minlength="1" maxlength="100"
+        [ngClass]="validClasses(color, 'is-valid', 'is-invalid')">
+      <div *ngIf="color.touched && color.invalid" class="alert alert-danger">
+        El color es obligatorio
+      </div>
+
+      <label for="anyo" class="form-label mt-3">Año</label>
+      <input class="form-control text-center" type="number" name="anyo" id="anyo" [(ngModel)]="nuevoCoche.anyo"
+      placeholder="Introduce el año del coche" required #anyo="ngModel" min="2000"
+      [ngClass]="validClasses(anyo, 'is-valid', 'is-invalid')">
+      <div *ngIf="anyo.touched && anyo.invalid" class="alert alert-danger">
+        El Año es obligatorio apartir del 2000
+      </div>
+
+      <label class="form-label mt-3" for="transmision">Transmision</label>
+      <select class="form-select text-center" id="transmision" [(ngModel)]="nuevoCoche.transmision" name="transmision">
+        <option disabled selected>Elige una opcion</option>
+        <option [value]="true">Automatico</option>
+        <option [value]="false">Manual</option>
+      </select>
+
+      <label for="precio" class="form-label mt-3">Precio</label>
+      <input class="form-control text-center" type="number" name="precio" id="precio" [(ngModel)]="nuevoCoche.precio"
+      placeholder="Introduce el año del coche" required #precio="ngModel" min="1"
+      [ngClass]="validClasses(precio, 'is-valid', 'is-invalid')">
+      <div *ngIf="precio.touched && precio.invalid" class="alert alert-danger">
+        El precio es obligatorio
+      </div>
+
+      <label class="form-label mt-3" for="transmision">Disponible</label>
+      <select class="form-select" id="transmision" [(ngModel)]="nuevoCoche.is_disponible" name="disponible"
+      required #disponible="ngModel" [ngClass]="validClasses(disponible, 'is-valid', 'is-invalid')">
+        <option disabled>Elige una opcion</option>
+        <option [value]="true" selected>SI</option>
+        <option [value]="false">No, en mantenimiento.</option>
+      </select>
+      <div *ngIf="disponible.touched && disponible.invalid" class="alert alert-danger">
+        Elige la disponibilidad
+      </div>
+
+      <label for="imagen" class="form-label mt-3">Imagen</label>
+      <input type="file" name="imagen" class="form-control text-center" id="fecha" required
+        #imagen accept="image/*" (change)="changeImage(imagen)">
+
+    </div>
+    <div class="col-12">
+      <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->
+      <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
+    </div>
+  </form>
+</div>

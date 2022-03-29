@@ -1,25 +1,41 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
   <div class="container-fluid">
-    <a class="navbar-brand" (click)="showHiddenOptions = false" routerLink="/">Gestionar Marcas</a>
+    <a class="navbar-brand" (click)="showHiddenOptions = false" routerLink="/login">Gestionar Marcas</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="showHiddenOptions=!showHiddenOptions">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="!showHiddenOptions">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" (click)="showHiddenOptions = false" aria-current="page" routerLink="/"><i class="bi bi-house-door me-1"></i>Home</a>
+          <a class="nav-link" (click)="showHiddenOptions = false" aria-current="page" routerLink="/home"><i class="bi bi-house-door me-1"></i>Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLogged()">
           <a class="nav-link" routerLink="/marcas" (click)="showHiddenOptions = false"><i class="bi bi-calendar-week me-1"></i>Marcas</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isLogged()">
           <a class="nav-link" routerLink="/modelos" (click)="showHiddenOptions = false"><i class="bi bi-calendar-plus me-1" ></i>Modelos</a>
         </li>
+        <li class="nav-item" *ngIf="isLogged()">
+          <a class="nav-link" routerLink="/coches" (click)="showHiddenOptions = false"><i class="bi bi-calendar-plus me-1" ></i>Coches</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLogged()">
+          <a class="nav-link" routerLink="/login" (click)="showHiddenOptions = false"><i class="bi bi-calendar-plus me-1" ></i>login</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged()">
+          <a class="nav-link" routerLink="/mis-reservas" (click)="showHiddenOptions = false"><i class="bi bi-calendar-plus me-1" ></i>Mis Reservas</a>
+        </li>
+
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-dark" (click)="showHiddenOptions = false" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+        <span class="nav-item" *ngIf="!isLogged()">
+          <a class="nav-link btn btn-outline-dark" routerLink="/registro"><i class="bi bi-calendar-plus me-1" ></i>Registro</a>
+        </span>
+        <span class="nav-item" *ngIf="isLogged()">
+          <a class="nav-link btn btn-outline-dark" (click)="logout()"><i class="bi bi-calendar-plus me-1" ></i>Log out</a>
+        </span>
+        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-dark" (click)="showHiddenOptions = false" type="submit">Search</button> -->
+      </div>
     </div>
   </div>
 </nav>

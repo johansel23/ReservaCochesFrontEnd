@@ -1,1 +1,29 @@
+<div *ngIf="isLogged()">
+  <h1 class="text-center">Reserva tu coche Ya!!!</h1>
+  <div class="card my-3" id="chover" *ngFor="let coche of listaCoche">
+    <div class="row g-0">
+      <div class="col-md-5">
+        <img src="{{coche.image}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <div class="text-center">
+            <h5 class="card-title h4 mt-2">{{coche.modelo.marca.nombre_marca}} {{coche.modelo.nombre_modelo}}</h5>
+            <p *ngIf="coche.transmision" class="card-text">Transmision: Automatica</p>
+            <p *ngIf="coche.transmision == false" class="card-text">Transmision: Mecanica</p>
+            <p class="card-text"><small class="text-muted">{{coche.combustible}} | {{coche.anyo}} | color: {{coche.color}}</small></p>
+            <p class="card-text h4"> Precio: <span class="text-danger">{{coche.precio}}€</span></p>
+          </div>
+          <div class="mt-4 text-center">
+            <button class="btn btn-outline-primary"><a class="nav-link" [routerLink]="['/reserva-coche']" [state]="{coche}">Reserva</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!isLogged()">
+  <a routerLink="/login"> Debes de hacer login primero</a>
+</div>
+
 

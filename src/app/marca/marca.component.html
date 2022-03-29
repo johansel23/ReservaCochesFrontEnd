@@ -1,4 +1,30 @@
+<h1 class="h1 text-center mt-2">Marcas</h1>
 
+<div>
+  <button class="btn btn-primary" type="button" (click)="cambiar()">Añadir</button>
+</div>
+
+
+<div class="mb-3" *ngIf="mostrar">
+  <form class="row g-3 text-center" (ngSubmit)="insertarMarca()" #formularioEvento="ngForm">
+    <div class="col-12">
+      <label for="nombre" class="form-label h4">Nombre Marca </label>
+      <!-- El ngModel sirve para relacionar el valor que ingreses en el input con el precio que esta en eventos.component.ts y se relaciona con la interfaz-->
+      <!-- el primero parametro del ngClass esta relacionado con #precio="ngModel"-->
+      <!-- Para usar el ngClass es necesario crear la funcion validClasses en el eventos.components.ts -->
+      <input type="text" class="form-control text-center" id="nombre" name="nombre" [(ngModel)]="nuevaMarca.nombre_marca"
+        placeholder="Ingresa el nombre de una Marca" required #nombre="ngModel" minlength="1" maxlength="100"
+        [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
+      <div *ngIf="nombre.touched && nombre.invalid" class="alert alert-danger">
+        Marca requerida (entre 1 y 60 caracteres)
+      </div>
+    </div>
+    <div class="col-12">
+      <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->
+      <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
+    </div>
+  </form>
+</div>
 
 <table class="table table-striped">
   <thead>
@@ -16,32 +42,9 @@
       </td>
     -->
     <td>{{ marcas.nombre_marca }}</td>
-    <td><i (click)="eliminarMarca(marcas.id_marca)" class="bi bi-trash3-fill btn btn-outline-danger"></i></td>
+    <!-- <td><i (click)="eliminarMarca(marcas.id_marca)" class="bi bi-trash3-fill btn btn-outline-danger"></i></td> -->
   </tr>
   </tbody>
 </table>
-<div class="text-center">
-  <button class="btn btn-primary" type="button" (click)="cambiar()">Añadir</button>
-</div>
 
 
-<div class="mb-5" *ngIf="mostrar">
-  <form class="row g-3 text-center" (ngSubmit)="insertarMarca()" #formularioEvento="ngForm">
-    <div class="col-12">
-      <label for="nombre" class="form-label h3">Marca </label>
-      <!-- El ngModel sirve para relacionar el valor que ingreses en el input con el precio que esta en eventos.component.ts y se relaciona con la interfaz-->
-      <!-- el primero parametro del ngClass esta relacionado con #precio="ngModel"-->
-      <!-- Para usar el ngClass es necesario crear la funcion validClasses en el eventos.components.ts -->
-      <input type="text" class="form-control text-center" id="nombre" name="nombre" [(ngModel)]="nuevaMarca.nombre_marca"
-        placeholder="Ingresa el nombre de una Marca" required #nombre="ngModel" minlength="1" maxlength="100"
-        [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
-      <div *ngIf="nombre.touched && nombre.invalid" class="alert alert-danger">
-        Marca requerida (entre 1 y 60 caracteres)
-      </div>
-    </div>
-    <div class="col-12">
-      <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->
-      <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
-    </div>
-  </form>
-</div>

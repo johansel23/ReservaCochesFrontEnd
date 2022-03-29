@@ -1,0 +1,21 @@
+<h1 class="text-center my-3">Mis Reservas</h1>
+
+<div class="card mb-3" *ngFor="let misReserva of listaReserva">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="http://localhost:8080/{{misReserva.coche.image}}" class="img-fluid rounded-start" alt="Alta Gama">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body text-center">
+        <h5 class="card-title">{{misReserva.coche.modelo.marca.nombre_marca}} {{misReserva.coche.modelo.nombre_modelo}}</h5>
+        <p class="card-text">Año: {{misReserva.coche.anyo}}</p>
+        <p class="card-text" *ngIf="misReserva.coche.transmision == false">Transmision: Mecanico</p>
+        <p class="card-text" *ngIf="misReserva.coche.transmision == true">Transmision: Automatico</p>
+        <p class="card-text">Combustible: {{misReserva.coche.combustible}}</p>
+        <p class="card-text">Color: {{misReserva.coche.color}}</p>
+        <p class="card-text">Precio: {{misReserva.coche.precio}}</p>
+        <p class="card-text">Fecha reserva: {{misReserva.fecha}}</p>
+      </div>
+    </div>
+  </div>
+</div>
