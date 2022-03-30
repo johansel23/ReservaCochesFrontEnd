@@ -8,7 +8,7 @@
   <form class="row g-3 text-center" (ngSubmit)="insertarModelo()" #formularioEvento="ngForm">
     <div class="col-12">
       <label for="nombre" class="form-label h2">Marca </label>
-      <select class="form-select" aria-label="Default select example" [(ngModel)]="nuevoModelo.id_marca" name="id_marca" required>
+      <select class="form-select text-center" aria-label="Default select example" [(ngModel)]="nuevoModelo.id_marca" name="id_marca" required>
         <option disabled>Elige un modelo</option>
         <option *ngFor="let marcas of listaMarcas" [value]="marcas.id_marca">{{marcas.nombre_marca}}</option>
       </select>

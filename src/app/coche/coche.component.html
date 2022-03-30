@@ -48,10 +48,10 @@
       </div>
 
       <label class="form-label mt-3" for="transmision">Disponible</label>
-      <select class="form-select" id="transmision" [(ngModel)]="nuevoCoche.is_disponible" name="disponible"
+      <select class="form-select text-center" id="transmision" [(ngModel)]="nuevoCoche.is_disponible" name="disponible"
       required #disponible="ngModel" [ngClass]="validClasses(disponible, 'is-valid', 'is-invalid')">
         <option disabled>Elige una opcion</option>
-        <option [value]="true" selected>SI</option>
+        <option [value]="true">SI</option>
         <option [value]="false">No, en mantenimiento.</option>
       </select>
       <div *ngIf="disponible.touched && disponible.invalid" class="alert alert-danger">

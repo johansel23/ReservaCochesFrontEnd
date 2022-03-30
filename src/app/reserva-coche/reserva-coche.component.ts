@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -22,6 +22,9 @@ export class ReservaCocheComponent implements OnInit {
     is_reservado: 'true'
   };
 
+
+
+
   constructor(private reserva: ReservaCocheService, private router: Router, private usuario: UsuariosService) { }
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class ReservaCocheComponent implements OnInit {
     this.nuevaReserva.id_coche = this.coche.coche.id_coche;
     this.obtenerUsuario();
   }
+
 
   obtenerReserva(){
     this.reserva.getReservaCoche().subscribe((datos:any) =>{

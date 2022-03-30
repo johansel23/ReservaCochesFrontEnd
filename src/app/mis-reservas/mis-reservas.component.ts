@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate, ViewportScroller } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ReservaCoche } from '../interfaces/reserva-coche';
 import { ReservaCocheService } from '../services/reserva-coche.service';
@@ -11,6 +13,9 @@ import { UsuariosService } from '../services/usuarios.service';
 })
 export class MisReservasComponent implements OnInit {
   listaReserva: any = [];
+  mostrarActualizar: boolean = false;
+  pageYoffset: number =0;
+  idReserva: number = 0;
   nuevaReserva: ReservaCoche ={
     id_coche: 0,
     fecha: '',
@@ -18,17 +23,27 @@ export class MisReservasComponent implements OnInit {
     is_reservado: ''
   }
 
-  constructor(private misReservas: ReservaCocheService, private usuario: UsuariosService ) { }
+  @HostListener('window:scroll', ['$event']) onScroll(){
+    this.pageYoffset = window.pageYOffset;
+  }
+
+  dateDay = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
+  constructor(private misReservas: ReservaCocheService, private usuario: UsuariosService , private scroll: ViewportScroller) { }
 
   ngOnInit(): void {
     this.obtenerUsuario();
+
   }
 
   obtenerMisReservas(id:number){
     this.misReservas.getReservaUsuario(id).subscribe((datos: any) =>{
       this.listaReserva = datos;
-      console.log(datos);
     });
+  }
+
+  scrollToTop(){
+    this.scroll.scrollToPosition([0,0]);
   }
 
   obtenerUsuario(){
@@ -77,10 +92,49 @@ export class MisReservasComponent implements OnInit {
     })
   }
 
-  updateReserva(idReserva: number){
-    this.misReservas.putReserva(this.nuevaReserva, idReserva).subscribe((datos: any) => {
-      
+  insertarReserva(){
+    Swal.fire({
+      icon: 'success',
+      title: 'Operacion Actualizada',
+      text: 'Actualizado correctamente!',
+    })
+    this.misReservas.postReservaCoche(this.nuevaReserva).subscribe((datos:any)=>{
+      this.mostrarActualizar= false;
+      this.nuevaReserva ={
+        id_coche: 0,
+        fecha: '',
+        id_usuario: 0,
+        is_reservado: ''
+      }
     });
   }
+
+  updateReserva(Reserva: any){
+    this.scrollToTop();
+    this.mostrarActualizar = true;
+    this.idReserva = Reserva.id_reserva;
+    this.nuevaReserva = Reserva;
+    this.misReservas.putReserva(this.nuevaReserva, this.idReserva).subscribe((datos: any) => {
+
+    });
+  }
+
+  validClasses(ngModel: NgModel, validClass: string, errorClass: string) {
+    return {
+      [validClass]: ngModel.touched && ngModel.valid,
+      [errorClass]: ngModel.touched && ngModel.invalid,
+    };
+  }
+
+  // actualizarMarca(marca: any){
+  //   this.scrollToTop();
+  //   this.mostrar = true;
+  //   this.insertarOanadir = false;
+  //   this.nuevaMarca = marca;
+  //   this.id = marca.id_marca;
+  //   this.marcas.putMarcas(this.nuevaMarca, this.id).subscribe((datos:any) => {
+  //     this.obtenerMarcas();
+  //   });
+  // }
 
 }
