@@ -21,5 +21,9 @@ export class MarcaService {
   deleteMarcas(id:number){
     return this.http.delete(`${HOST}/${id}`)
   }
+
+  putMarcas(marca: Marca, id:number){
+    return this.http.put(`${HOST}/${id}`, marca);
+  }
 }
 

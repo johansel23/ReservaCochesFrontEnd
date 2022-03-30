@@ -1,9 +1,10 @@
+<h1 class="text-center my-3">Registro de Usuario</h1>
 <div class="mb-3">
   <form class="row g-3 text-center" (ngSubmit)="crearRegistro()" #formularioEvento="ngForm">
     <div class="col-12">
 
       <label for="nombre" class="form-label h4 mt-2">Usuario</label>
-      <input type="text" class="form-control text-center" id="nombre" name="nombre" [(ngModel)]="nuevoRegistro.nombre"
+      <input type="text" class="form-control text-center mb-2" id="nombre" name="nombre" [(ngModel)]="nuevoRegistro.nombre"
         placeholder="Ingresa el nombre de una Marca" required #nombre="ngModel" minlength="1" maxlength="100"
         [ngClass]="validClasses(nombre, 'is-valid', 'is-invalid')">
       <div *ngIf="nombre.touched && nombre.invalid" class="alert alert-danger">
@@ -11,11 +12,11 @@
       </div>
 
       <label for="email" class="form-label h4 mt-2">Correo Electronico</label>
-      <input type="email" class="form-control text-center" id="email" name="email" [(ngModel)]="nuevoRegistro.correo"
-        placeholder="ejemplo@gmail.com" required #email="ngModel" minlength="1" maxlength="100"
+      <input type="email" class="form-control text-center mb-2" id="email" name="email" [(ngModel)]="nuevoRegistro.correo"
+        placeholder="ejemplo@gmail.com" pattern=".+@\.com" required #email="ngModel" minlength="1" maxlength="100"
         [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
       <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-        Correo Obligatorio
+        Algo ha salido mal con el Correo
       </div>
 
       <label for="password" class="form-label h4 mt-2">Contraseña</label>

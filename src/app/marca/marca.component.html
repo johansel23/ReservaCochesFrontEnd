@@ -21,7 +21,8 @@
     </div>
     <div class="col-12">
       <!-- el disable sirve para desabilitar el boton hasta que todos los campos esten llenos -->
-      <button type="submit" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
+      <button type="submit" *ngIf="insertarOanadir" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Añadir</button>
+      <button type="submit" *ngIf="insertarOanadir == false" class="btn btn-success mb-3 w-100" [disabled]="!formularioEvento.form.valid">Actualizar</button>
     </div>
   </form>
 </div>
@@ -30,7 +31,7 @@
   <thead>
   <tr>
     <th scope="col">#</th>
-    <th scope="col">marcas</th>
+    <th scope="col">Marcas</th>
   </tr>
   </thead>
   <tbody>
@@ -42,7 +43,9 @@
       </td>
     -->
     <td>{{ marcas.nombre_marca }}</td>
-    <!-- <td><i (click)="eliminarMarca(marcas.id_marca)" class="bi bi-trash3-fill btn btn-outline-danger"></i></td> -->
+    <td><i (click)="eliminarMarca(marcas.id_marca)" class="bi bi-trash3-fill btn btn-outline-danger me-2"></i>
+        <i (click)="actualizarMarca(marcas)" class="bi bi-pen-fill btn btn-outline-info"></i></td>
+
   </tr>
   </tbody>
 </table>
