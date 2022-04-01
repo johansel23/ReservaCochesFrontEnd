@@ -13,7 +13,7 @@
 
       <label for="email" class="form-label h4 mt-2">Correo Electronico</label>
       <input type="email" class="form-control text-center mb-2" id="email" name="email" [(ngModel)]="nuevoRegistro.correo"
-        placeholder="ejemplo@gmail.com" pattern=".+@\.com" required #email="ngModel" minlength="1" maxlength="100"
+        placeholder="ejemplo@gmail.com" pattern=".+@gmail\.com" required #email="ngModel" minlength="1" maxlength="100"
         [ngClass]="validClasses(email, 'is-valid', 'is-invalid')">
       <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
         Algo ha salido mal con el Correo

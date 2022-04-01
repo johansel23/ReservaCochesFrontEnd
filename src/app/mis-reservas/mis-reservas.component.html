@@ -29,7 +29,7 @@
         <p class="card-text" *ngIf="misReserva.coche.transmision == true">Transmision: Automatico</p>
         <p class="card-text">Combustible: {{misReserva.coche.combustible}}</p>
         <p class="card-text">Color: {{misReserva.coche.color}}</p>
-        <p class="card-text">Precio: {{misReserva.coche.precio}}</p>
+        <p class="card-text">Precio: <span class="text-danger"> {{misReserva.coche.precio}} €</span></p>
         <p class="card-text">Fecha reserva: {{misReserva.fecha | date:'dd/MM/yyyy'}}</p>
       </div>
     </div>
